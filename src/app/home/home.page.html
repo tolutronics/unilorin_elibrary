@@ -1,20 +1,53 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content style="position: relative;">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  
+  <app-header [loggedin]="loggedin"></app-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+
+   
+  <ion-slides [options]="slideOptsOne" pager="true" (click)="bodyclick()" *ngIf="!isSearching">
+      <ion-slide *ngFor="let item of topStories">
+       
+            <ion-img [src]="item.image" style="position: relative" ></ion-img>
+            <h2 *ngIf="status" style="color: rgb(19, 199, 58); font-weight:bold;">{{fname}}</h2>
+            <h1>University of Ilorin<br> Offline E-resources Repository</h1>
+      </ion-slide>
+     </ion-slides>
+    
+
+
+  <ion-grid class="wrap">
+    <ion-row>
+     
+      <ion-col class="wcol" padding>
+          <div class="head">E-books</div>
+          <div class="subhead">
+              <ion-list padding >
+                  <ion-item *ngFor="let ebook of ebooks" (click)="sgoto()">
+                    <!-- <h6 slot="start">{{Notice.id}}</h6> -->
+                   {{ebook.file_title}}
+                  </ion-item>
+                </ion-list>
+          </div>
+      </ion-col>
+
+
+      <ion-col class="wcol" padding>
+          <div class="head">E-journals</div>
+          <div class="subhead">
+              <ion-list padding >
+                  <ion-item *ngFor="let journal of journals" (click)="jgoto()">
+                    <!-- <h6 slot="start">{{Notice.id}}</h6> -->
+                   {{journal.file_title}}
+                  </ion-item>
+                </ion-list>
+          </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <app-footer></app-footer>
 </ion-content>
+
+
+  
+

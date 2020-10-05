@@ -1,0 +1,255 @@
+.toolbar1{
+    height: fit-content;
+   
+    & > .login{
+      display: flex;
+      justify-content: space-between;
+      width: 100px;
+      margin-right: 10px;
+      & > p{
+          color: #fff;
+          font-size: 13px;
+          cursor: pointer;
+          padding: 5px;
+  
+          &:hover{
+            background-color: #afbdaf59;  
+          }
+      }
+  }
+   
+    & > .logowrap {
+     display: flex;
+    }
+  
+    & > .logowrap > ion-label{
+           margin-top: 30px;
+        & > h2{
+                color: #fff;
+                font-size: 20px;
+                font-family: san-serif;
+                letter-spacing: 1px;
+        }
+        & > p{
+            color: #fff;
+            font-size: 16px;
+            letter-spacing: 1px;
+            font-family: san-serif;
+        }
+    }
+  }
+  
+  .logo{
+    width: 70px;
+  height: 70px;
+  padding: 10px;
+  margin-left: 20px;
+  }
+  ion-item{
+    --background:none;
+  }
+  
+  .toolbar2 {
+     position: sticky;
+    top:0px;
+    height: 50px;
+    display:flex;
+    align-items:center;
+  
+    & > .menu{
+      display: flex;
+      justify-content: space-around;
+      width: 40%;
+      & > li{
+        color: #fff;
+        padding: 12px;
+        font-size: 13px;
+        list-style: none;
+        transition:1s;
+  
+          &:hover{
+            cursor: pointer;
+            background-color: #afbdaf59;
+          }
+      }
+    }
+    & > ion-icon{
+      padding:10px;
+      z-index: 10;
+  }
+  
+  & > ion-searchbar{
+      width: 300px;
+      --box-shadow: none;
+      --background: #afbdaf59;
+      color: #fff;
+      --icon-color:#fff;
+      position: absolute;
+      right: 0;
+      z-index: 1;
+  
+      &:hover{
+        cursor:pointer;
+      }
+  }
+   
+    }
+  
+    ion-searchbar{
+      
+      ::ng-deep{
+          .searchbar-input-container{            
+              .searchbar-input{ 
+                  border-radius: 20px;
+                  font-size: 12px;
+                  padding:2px 35px 2px 30px;
+                  color:#fff;
+                 
+              }
+              .searchbar-cancel-button{
+                color:#fff;
+                font-size: 18px;
+              }
+              .searchbar-clear-button{
+                color:#fff;
+                font-size: 18px;
+              }
+          }
+      }   
+  }
+//........................................
+ion-img{
+    // margin-top:px;
+    margin-left: 150px;
+    height: 500px;
+    width: 500px;
+}
+.mat-expansion-panel {
+    margin-bottom: 10px;
+    box-shadow: 0px 1px 0px 1px #d0c8c8;
+    padding: 20px;
+  
+}
+
+// ::ng-deep #ebooks{
+//   background-color: #232b2775 !important;
+
+// }
+// ::ng-deep #journals{
+//   background-color: var(--ion-color-secondary) !important;
+
+// }
+// ::ng-deep #home{
+//   background-color: var(--ion-color-secondary) !important;
+
+// }
+// ::ng-deep #databases{
+//   background-color: var(--ion-color-secondary) !important;
+
+// }
+
+.container{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    top:0px;
+    left:0px;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 100px;
+}
+
+.faculty{
+    background-color: green;
+    //border: 2px solid #c0c0c0c0;
+    color: white;
+    padding: 10px;
+    
+}
+
+.list{
+    margin-top: 50px;
+}
+
+.deptrow{
+    background-color: rgba(11, 85, 35, 0.164);
+}
+
+.department{
+    width:100%;
+    border-bottom: 1px solid #ffffff;
+
+}
+
+.accordion{
+    background-color:#ffffff;
+ 
+}
+mat-list-item{
+    border-bottom:1px solid #a09c9c1c;
+   // color:rgb(197, 192, 192);
+    font-size: 14px;
+font-family: san-serif;
+}
+
+mat-list-item:hover{
+    background-color: #a09c9c1c;
+    cursor: pointer;
+    
+}
+
+
+
+
+
+// @media (max-width: 790px) {
+
+//     .headlist{
+//         margin-right: 30px;
+//     }
+    
+//     .headlist:hover{
+//         cursor:pointer;
+//         --background-color: #008000;
+//         padding: 10px;
+//     }
+//     .last{
+//         margin-right: 70px;
+//     }
+//     .list{
+//         margin-top: 50px;
+//         width: 100%;
+//     }
+
+    
+
+   
+   
+//   }
+
+  @media (max-width: 760px) {
+    .headlist{
+        display: none;
+    }
+    .last{
+        display: none;
+    }
+
+    ion-icon{
+        display:block;
+        font-size: 30px;
+    }
+
+    ion-title{
+        font-size: 20px;
+    }
+
+    .login{
+        margin-right:30px;
+        padding: 5px;
+    }
+    .list{
+        margin-top: 50px;
+        width: 100%;
+    }
+  }

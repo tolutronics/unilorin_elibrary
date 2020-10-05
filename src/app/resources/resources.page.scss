@@ -1,0 +1,184 @@
+// ::ng-deep #databases{
+//     background-color: #232b2775 !important;
+
+// }
+// ::ng-deep #ebooks{
+//     background-color: var(--ion-color-secondary) !important;
+
+// }
+// ::ng-deep #home{
+//     background-color: var(--ion-color-secondary) !important;
+
+// }
+// ::ng-deep #journals{
+//     background-color: var(--ion-color-secondary) !important;
+
+// }
+
+a{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.horix:hover{
+    background-color:#309c6633; 
+    color: black;
+}
+
+.item:hover{
+    background-color:#309c6633; 
+    color: black;
+    cursor: pointer;
+}
+
+.homelabel:hover{
+    cursor:pointer;
+    }
+   
+
+
+
+.headlist{
+    margin-right: 30px;
+}
+
+.mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button {
+   
+    cursor: pointer;
+  
+    text-align: center;
+ 
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.mat-button:hover{
+    background-color: #234b3575;
+}
+
+
+.last{
+    margin-right: 70px;
+}
+
+#this{
+    background-color: #234b3575;
+}
+
+.menu{
+    height:100%;
+    width:20%;
+}
+
+.menuicon{
+    padding: 10px;
+}
+
+ion-label p{
+    font-size: 15px;
+    margin-left: 40px;
+    letter-spacing: 2px;
+    padding-bottom: 5px;
+}
+ion-title h3{
+    font-size: 25px;
+    font-family: "Lobster", serif;
+    letter-spacing: 3px;
+    padding: 5px;
+}
+
+.login{
+    background-color: #008000;
+    padding: 10px;
+    color: #ffffff;
+    margin-right: 50px;
+}
+
+.login:hover{
+    cursor: pointer;
+}
+
+
+.container{
+  
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    top:0px;
+    left:0px;
+    width: 100%;
+    height: 100%;
+}
+
+.intro{
+
+    margin-top: 200px;
+    // background-color: #cccccc;
+    // width:25%;
+    margin-left:50px;
+    color: white;
+    font-size:40px;
+    letter-spacing:3px;
+}
+
+ion-item{
+    margin-bottom: 10px;
+
+}
+
+ion-item:hover{
+    cursor: pointer;
+}
+
+.button{
+    height: 90%;
+    background-color: green;
+    text-align: center;
+}
+
+
+
+@media (max-width: 700px) {
+
+    .headlist{
+        margin-right: 30px;
+    }
+    
+    .headlist:hover{
+        cursor:pointer;
+        --background-color: #008000;
+        padding: 10px;
+    }
+    .last{
+        margin-right: 70px;
+    }
+
+   
+   
+  }
+
+  @media (max-width: 610px) {
+    .headlist{
+        display: none;
+    }
+    .last{
+        display: none;
+    }
+
+    ion-icon{
+        display:block;
+        font-size: 30px;
+    }
+
+    ion-title{
+        font-size: 20px;
+    }
+
+    .login{
+        margin-right:30px;
+        padding: 5px;
+    }
+
+
+
+  }

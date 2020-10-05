@@ -1,0 +1,206 @@
+
+
+<ion-content *ngIf="loggedin" >
+
+<app-header></app-header>
+  
+    <div class="container" >
+
+     <ion-grid  (click)="bodyclick()" >
+       <ion-row > 
+        <ion-col size=6 style="padding-left: 30px"> 
+          <mat-expansion-panel (click)="select('Agriculture')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Agriculture
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+        
+            <mat-list role="list">
+              <mat-list-item role="listitem" (click)="store(agric.title)" *ngFor="let agric of agrics; let i = index" >{{agric.title}}</mat-list-item>
+            </mat-list>
+          </mat-expansion-panel> 
+
+          <mat-expansion-panel (click)="select('Arts')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Arts
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+        
+            <mat-list role="list">
+              <mat-list-item role="listitem" (click)="store(art.title)" *ngFor="let art of arts; let i = index" >{{art.title}}</mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel (click)="select('Basic Medical Science')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Basic Medical Science
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+        
+            <mat-list role="list">
+              <mat-list-item role="listitem" (click)="store(bms.title)" *ngFor="let bms of bmss; let i = index" >{{bms.title}}</mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel (click)="select('Communication and Information Science')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Communication and Information Science
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+        
+            <mat-list role="list">
+              <mat-list-item role="listitem" (click)="store(cis.title)" *ngFor="let cis of ciss; let i = index" >{{cis.title}}</mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+           
+          <mat-expansion-panel (click)="select('Education')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Education
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+        
+            <mat-list role="list">
+              <mat-list-item role="listitem" (click)="store(edu.title)" *ngFor="let edu of edus; let i = index" >{{edu.title}}</mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel (click)="select('Engineering and Technology')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Engineering and Technology
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+        
+            <mat-list role="list">
+              <mat-list-item role="listitem" (click)="store(eng.title)" *ngFor="let eng of engs; let i = index" >{{eng.title}}</mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+
+          
+          <mat-expansion-panel (click)="select('Environmental Sciences')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+               Environmental Sciences
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+        
+            <mat-list role="list">
+              <mat-list-item role="listitem" (click)="store(env.title)" *ngFor="let env of envs; let i = index" >{{env.title}}</mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+
+          
+          <mat-expansion-panel (click)="select('Law')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+               Law
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+        
+            <mat-list role="list">
+              <mat-list-item role="listitem" (click)="store(law.title)" *ngFor="let law of laws; let i = index" >{{law.title}}</mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+
+
+          <mat-expansion-panel (click)="select('Life Science')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+               Life Science
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+        
+            <mat-list role="list">
+              <mat-list-item role="listitem" (click)="store(life.title)" *ngFor="let life of lifes; let i = index" >{{life.title}}</mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+
+
+          <mat-expansion-panel (click)="select('Management Sciences')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+              Management Sciences
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+        
+            <mat-list role="list">
+              <mat-list-item role="listitem" (click)="store(mgt.title)" *ngFor="let mgt of mgts; let i = index" >{{mgt.title}}</mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+
+
+          <mat-expansion-panel (click)="select('Pharmaceutical Sciences')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+               Pharmaceutical Sciences
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+        
+            <mat-list role="list">
+              <mat-list-item role="listitem" (click)="store(pharm.title)" *ngFor="let pharm of pharms; let i = index" >{{pharm.title}}</mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel (click)="select('Physical Sciences')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+               Physical Sciences
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+        
+            <mat-list role="list">
+              <mat-list-item role="listitem" (click)="store(phy.title)" *ngFor="let phy of phys; let i = index" >{{phy.title}}</mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+
+
+          <mat-expansion-panel (click)="select('Social Sciences')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+               Social Sciences
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+        
+            <mat-list role="list">
+              <mat-list-item role="listitem" (click)="store(social.title)" *ngFor="let social of socials; let i = index" >{{social.title}}</mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel (click)="select('Veterinary Medicine')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Veterinary Medicine 
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+        
+            <mat-list role="list">
+              <mat-list-item role="listitem" (click)="store(vet.title)" *ngFor="let vet of vets; let i = index" >{{vet.title}}</mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+          
+          
+        </ion-col>
+        <ion-col size=5>
+
+            <ion-slides [options]="slideOptsOne" pager="true">
+                <ion-slide *ngFor="let item of topStories">
+                 
+                      <ion-img [src]="item.image" ></ion-img>
+                   
+                </ion-slide>
+               </ion-slides>
+
+        </ion-col>
+       </ion-row>
+     </ion-grid>
+     <app-footer ></app-footer>
+ </div>
+ 
+ </ion-content>
+
+ 

@@ -1,0 +1,38 @@
+<ion-toolbar  color="primary" class="toolbar1" (click)="bodyclick()">
+  <div class="logowrap">
+    <img src="assets/img/logo.png" alt="" class="logo" slot="start">
+    <ion-label>
+      <h2>University of Ilorin</h2>
+      <p>E-library</p>
+    </ion-label>
+  </div>
+ 
+ <div slot="end" class="login" *ngIf="!loggedin">
+  <p (click)="loginPop()">Login</p>
+  <p (click)="registerPop()">Register</p>
+</div>
+<ion-item slot="end" class="user" *ngIf="loggedin" lines="none" (click)="profile()">
+  <ion-avatar>
+    <img src="assets/img/tolu.jpg" />
+  </ion-avatar>
+  <p>{{reg}}</p>
+
+</ion-item>
+
+</ion-toolbar>
+<ion-toolbar color="secondary" class="toolbar2" *ngIf='!profilepage'>
+  
+<ul class="menu">
+  <li (click)="home()" id="home">Home</li>
+  <li (click)="database()" id="databases">Databases</li>
+  <li (click)="ebook()" id="ebooks">Ebooks</li>
+  <li (click)="journal()" id="journals">Journals</li>
+</ul>
+  <ion-searchbar *ngIf="isOpened" placeholder="Filter Pizza" slot="end" (ionCancel)="close()" (ionInput)="update($event)" showCancelButton="focus"></ion-searchbar>
+  <ion-icon slot="end" name="search" *ngIf="!isOpened" (click)="search()"></ion-icon>
+
+</ion-toolbar>
+
+<ion-list *ngIf="isSearching" class="isSearching">
+  <ion-item *ngFor="let item of all" (click)="locate(item.file_type,item.department)">{{item.file_title}}</ion-item>
+</ion-list>

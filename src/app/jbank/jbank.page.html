@@ -1,0 +1,29 @@
+
+<ion-content *ngIf="loggedin">
+  <app-header></app-header>
+  <div class="container" >
+      
+<!-- <ion-list padding (click)="bodyclick()">
+  <ion-item *ngFor="let ebook of ebooks"  >
+    <ion-icon name="book" slot="start"></ion-icon>
+   {{ebook.file_title}}
+   <p slot="end">{{ebook.file_size}}KB</p>
+   <ion-button slot="end" class="button" (click)="download(ebook.file_title)" > <a href="{{ebook.file_url}}" rel="noopener" target="_blank" color="light" >{{ebook.file_count}} DOWNLOADS</a></ion-button>
+
+  </ion-item>
+</ion-list> -->
+<div class="download"  (click)="bodyclick()">
+  <p>Download History</p>
+    <ion-item lines="none" *ngFor="let ebook of ebooks">
+      <p slot="start">{{ebook.file_title}}</p>
+      <p slot="end">{{ebook.file_size}}KB</p>
+      <p slot="end"><ion-icon slot="end" name="download-outline"></ion-icon>{{ebook.file_count}}</p> 
+      
+      <p slot="end" style="text-decoration: underline; cursor: pointer; color: var(--ion-color-secondary);">Download</p>
+    </ion-item>
+
+</div>
+<app-footer></app-footer>
+</div> 
+
+</ion-content>

@@ -1,27 +1,169 @@
-#container {
-  text-align: center;
 
+
+//////////////////////////////////////////////////
+// ion-icon{
+//   display:none;
+// }
+// ::ng-deep #home{
+//   background-color: #232b2775 !important;
+
+// }
+// ::ng-deep #ebooks{
+//   background-color: var(--ion-color-secondary) !important;
+
+// }
+// ::ng-deep #journals{
+//   background-color: var(--ion-color-secondary) !important;
+
+// }
+// ::ng-deep #databases{
+//   background-color: var(--ion-color-secondary) !important;
+
+// }
+.isSearching{
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+height: 100%;
+width: 100%;
+background-color: #3e353596;
+z-index: 100;
+}
+ion-img{
+//   -webkit-filter: blur(3px);
+// -moz-filter: blur(3px);
+// -o-filter: blur(3px);
+// -ms-filter: blur(3px);
+// filter: blur(3px);
+// z-index: 1;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+h1{
+  position: absolute; 
+  width:100%;
+   top:30%; 
+   color:#ffffff;
+    font-size:70px; 
+    text-align:center;
+    z-index: 9999;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+h2{
+  
+  position: absolute;
+   width:100%; 
+   top:10%; 
+   color:#ffffff;
+    font-size:40px;
+    z-index: 9999;
 }
 
-#container a {
-  text-decoration: none;
+
+
+
+.sc-ion-popover-md-h {
+  --width: 100%;
+  margin: 20%;
+  --max-height: 90%;
+  --box-shadow: 0 5px 5px -3px rgba(0,0,0,0.2),0 8px 10px 1px rgba(0,0,0,0.14),0 3px 14px 2px rgba(0,0,0,0.12);
+}
+
+
+.container{
+  height: 600px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  top:0px;
+  left:0px;
+  width: 100%;
+  height: 100%; 
+}
+
+.intro{
+
+ 
+  // background-color: #cccccc;
+  // width:25%;
+  margin-left:50px;
+  color: white;
+  font-size:40px;
+  letter-spacing:3px;
+}
+
+ion-item{
+  color: #302f2fd7;
+  font-family:comic;
+}
+
+.head{
+  background-color:green;
+  padding:10px;
+  color:#ffffff;
+}
+
+.subhead{
+text-align: justify;
+}
+
+.wcol{
+  padding: 30px;
+}
+
+.headrow{
+ 
+  margin-left: 200px;
+}
+
+
+
+
+@media (max-width: 700px) {
+
+  .headlist{
+      margin-right: 30px;
+  }
+  
+  .headlist:hover{
+      cursor:pointer;
+      --background-color: #008000;
+      padding: 10px;
+  }
+  .last{
+      margin-right: 70px;
+  }
+
+ 
+ 
+}
+
+@media (max-width: 610px) {
+  .headlist{
+      display: none;
+  }
+  .last{
+      display: none;
+  }
+
+  ion-icon{
+      display:block;
+      font-size: 30px;
+  }
+
+  ion-title{
+      font-size: 20px;
+  }
+
+  .login{
+      margin-right:30px;
+      padding: 5px;
+  }
+
+  .wrap{
+      width:100%;
+  }
+
+  ion-item{
+      color: green;
+      font-family:comic;
+      padding:10px;
+  }
 }

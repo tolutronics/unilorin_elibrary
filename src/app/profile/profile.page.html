@@ -1,0 +1,95 @@
+
+<ion-content>
+
+  <app-header [loggedin]="loggedin"  [profilepage]="profilepage"></app-header>
+
+  <div class="container">
+    <div class="header">
+      <ion-icon slot="start" name="arrow-back"></ion-icon>
+     <ul>
+       
+        <li (click)="profile()">Profile</li>
+        <li (click)="statistics()">Statistics</li>
+        <li (click)="settings()">Settings</li>
+        <li (click)="downloads()">Downloads</li>
+     </ul>
+     <ion-item lines="none" (click)="logout()">
+       <p>Logout</p>
+       <ion-icon slot="end" name="log-out-outline"></ion-icon>
+      </ion-item>
+    </div>
+
+    <ion-slides [options]="sliderConfig2" #slides class="slider">
+
+      <ion-slide>
+      <div>
+        
+        <div class="wrap1">
+          <p>First Name</p>
+          <h3>{{firstname}} </h3>
+        </div>
+
+        <div class="wrap1">
+          <p>Last Name</p>
+          <h3>{{lastname}} </h3>
+        </div>
+
+        <div class="wrap1">
+          <p>Reg Number</p>
+          <h3>{{reg}} </h3>
+        </div>
+
+        <div class="lwrap" >
+          <p>Email Address</p>
+          <div class="lwrap1">
+            <p class="p1">Your email address is {{email}} </p>
+            <p class="p2" (click)="emailChange()">Change</p>
+          </div>
+        </div>
+
+        <div class="lwrap" >
+          
+          <div class="lwrap1">
+            <p class="p1">password </p>
+            <p class="p2" (click)="passwordChange()">Change</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <img src="assets/img/tolu.jpg" alt="">
+       <ion-button (click)="onClick()" expand="block" fill="clear" shape="round">
+         Update
+       </ion-button>
+       <p class="delete">Delete My account</p>
+      </div>
+      </ion-slide>
+
+      <ion-slide>
+
+          <canvas #barCanvas  style="position: relative; height:200px; width:400px"></canvas>
+
+      </ion-slide>
+
+      <ion-slide>
+        <h1>Slide 3</h1>
+      </ion-slide>
+
+      <ion-slide>
+        <div class="download">
+          <p>Download History</p>
+            <ion-item lines="none" *ngFor="let download of downloaded">
+              <p slot="start">the Regional urban of the under developed places</p>
+              <p slot="end">Downloaded on 12/3/23</p>
+            </ion-item>
+      
+        </div>
+      </ion-slide>
+
+     
+
+      </ion-slides>
+  
+  </div>
+
+</ion-content>

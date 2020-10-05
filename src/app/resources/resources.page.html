@@ -1,0 +1,45 @@
+
+<ion-content *ngIf="loggedin" >
+
+  <app-header></app-header>
+  <div class="container" >
+    <!-- <app-header  [display]="display" [status]="status"  [isOpened]="isOpened"  (messageEvent)="receiveMessage($event)"></app-header>
+    <div style="width: 100%; background-color:green; " *ngIf="isOpened">
+        <ion-searchbar animated slot="end" showCancelButton="true" class="search" (ionCancel)="close()" (ionInput)="update($event)" placeholder="Search" [(ngModel)]="queryText"></ion-searchbar>
+      </div> 
+      <ion-list *ngIf="isSearching">
+          <ion-item *ngFor="let item of all" (click)="locate(item.file_type,item.department)">{{item.file_title}}</ion-item>
+        </ion-list> -->
+
+<ion-grid style="width: 90%"  (click)="bodyclick()">
+  <ion-row>
+    <ion-col size="9" >
+      <a href="{{resource.url}}" *ngFor="let resource of resources" rel="noopener" target="_blank">
+    <ion-card class="horix">
+      <ion-row style="height: 80%">
+        <ion-col size="3"><img src="{{resource.image}}" alt="" style="height: 200px; width: 200px;"> </ion-col>
+        <ion-col size="9">
+          <ion-row><h3>{{resource.title}}</h3> </ion-row>
+          <ion-row> {{resource.about}}
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </a>
+    </ion-col>
+ 
+
+    <ion-col size="3" ><ion-card class="ion-padding"  style="height: 100%">
+     <ion-list *ngFor="let side of sides">
+       <ion-item  >
+        <img src="{{side.image}}" alt="" style="height: 200px; width: 200px;">
+        
+       </ion-item>
+     </ion-list>
+    </ion-card></ion-col>
+  </ion-row>
+</ion-grid>
+<app-footer></app-footer>
+</div>
+
+</ion-content>

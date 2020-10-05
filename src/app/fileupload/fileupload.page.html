@@ -1,0 +1,74 @@
+<!-- 
+<ion-content *ngIf="matric=='elib@admin'"> -->
+  <ion-content >
+  
+
+
+  <app-header ></app-header>
+    
+    <div class="wrapper">
+        <h3 style="margin-left:10px" >Materials Uploader</h3>
+
+        <ion-card>
+          <ion-select interface="action-sheet" role="list" placeholder="Type of Material to Upload" (ionChange)="TypeChanged($event)" class="mat-select">
+                <ion-select-option  value="E-books">
+                   E-books
+                  </ion-select-option>
+
+                  <ion-select-option  value="E-journals">
+                    E-journals
+                   </ion-select-option>
+            </ion-select>
+          </ion-card>
+    <ion-card>
+      <ion-select interface="action-sheet" role="list" placeholder="Upload to which faculty" (ionChange)="FacultyChanged($event)">
+            <ion-select-option *ngFor="let faculty of faculties let i = index"  [value]="faculty.title">
+                {{faculty.title}}
+              </ion-select-option>
+        </ion-select>
+      </ion-card>
+        
+<ion-card> <ion-select interface="action-sheet" role="list" placeholder="Upload to which department" (ionChange)="DeptChanged($event)">
+        <ion-select-option *ngFor="let dept of depts; let i = index" [value]="dept.title">
+          {{dept.title}}
+          </ion-select-option>
+        </ion-select></ion-card>
+       
+
+
+  <ion-card>
+    <h4 style="color: black">Choose File to Upload</h4>
+    <p style="color: #000000">You may choose more than one file</p>
+    <form class="divs" enctype="multipart/form-data"  method="post">
+      <input class="fileInput" #inputFile type="file" name="file" id="file" (change)="onDrop($event.target.files)" multiple>
+      <label for="file" class="choose">Choose files to upload </label></form>
+      <br>
+
+      <ion-list role="list" *ngIf="show">
+        <ion-item role="listitem"  *ngFor="let file of files" >
+          <p style="width:40%">{{file.name}}</p>
+          <p slot="end">{{message}}</p>
+          <ion-spinner name="circles" slot="end" *ngIf="uploading"></ion-spinner>
+          <ion-icon class="success" name="checkmark" slot="end" *ngIf="complete"></ion-icon>
+        </ion-item>
+      </ion-list>
+  <br>
+        
+     <input   id="submit"  name="submit" class="submit"> 
+      <label for="submit" class="confirm" (click)="upload()">Confirm your Uploads</label>
+      <br>
+    </ion-card>
+
+  
+
+   
+
+  <!-- <h3>Uploads</h3> -->
+    
+   
+  
+  
+    </div>
+  
+    <app-footer></app-footer>
+</ion-content>

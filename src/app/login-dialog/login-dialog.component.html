@@ -1,0 +1,20 @@
+<ion-item lines="none" class="head">
+  
+  <h3 slot="start">Login</h3>
+  <ion-icon slot="end" name="close-outline" (click)="close()"></ion-icon>
+</ion-item>
+
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+  <ion-item >
+    <ion-label position="floating">Matric/Staff Number <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input required formControlName="reg_num" type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input required formControlName="password" type="password"></ion-input>
+  </ion-item>
+
+  <ion-button block color="primary" type="submit" [disabled]="loginForm.invalid">
+    Login
+  </ion-button>
+  </form>
