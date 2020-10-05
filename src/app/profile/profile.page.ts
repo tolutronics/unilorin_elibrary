@@ -148,6 +148,7 @@ export class ProfilePage implements AfterViewInit  {
     this.postPvdr.postData(body, 'proses-api.php').subscribe(async data =>{
      
      this.User=data['result']
+     console.log(this.User)
      this.firstname=this.User['firstname']
      this.lastname=this.User['lastname']
      this.email=this.User['email_address']
@@ -164,15 +165,15 @@ export class ProfilePage implements AfterViewInit  {
     this.barChartMethod();
 
   }
+
   async logout(){
-   
     const loading = await this.loadingCtrl.create({
-      duration: 500000000,
+      duration: 1000,
       spinner: 'bubbles'
     });
     await loading.present();
     await Storage.clear().then(async ()=>{
-      await loading.dismiss().then(()=>{
+      await loading.onDidDismiss().then(()=>{
         var q ={
           loggedin:false,
          // filetype:'E-journals'
@@ -184,6 +185,34 @@ export class ProfilePage implements AfterViewInit  {
       })
       
     })
+  }
+
+  async logoutAlert(){
+    const alert = await this.alert.create({
+      header:'Warning',
+      message:'Are you sure you want to logout?',
+      backdropDismiss:false,
+      buttons:[
+        {
+          text:'YES',
+          role:'ok',
+          handler:(data)=>{
+            this.logout()
+          }
+        },
+          {
+          text:'NO',
+          role:'cancel',
+          handler:async (data)=>{
+            await alert.dismiss()
+          }
+        }
+        
+      ]
+    });
+    await alert.present()
+   
+
 
   }
   barChartMethod() {
@@ -222,35 +251,38 @@ export class ProfilePage implements AfterViewInit  {
 
   async profile(){
     const loading = await this.loadingCtrl.create({
-      duration: 500000000,
+      duration:1000,
       spinner: 'bubbles'
     });
     await loading.present();
-    await loading.dismiss().then(()=>{
+    await loading.onDidDismiss().then(()=>{
       this.slides.slideTo(0,1000)
     })
     
   }
 
+  home(){
+this.router.navigate(['/home'])
+  }
+
   async statistics(){
     const loading = await this.loadingCtrl.create({
-      duration: 500000000,
+      duration: 1000,
       spinner: 'bubbles'
     });
     await loading.present();
-    this.slides.slideTo(1,1000)
-    await loading.dismiss().then(()=>{
-      
+        await loading.onDidDismiss().then(()=>{
+      this.slides.slideTo(1,1000)
     })
   }
 
   async settings(){
     const loading = await this.loadingCtrl.create({
-      duration: 500000000,
+      duration: 1000,
       spinner: 'bubbles'
     });
     await loading.present();
-    await loading.dismiss().then(()=>{
+    await loading.onDidDismiss().then(()=>{
       this.slides.slideTo(2,1000)
     })
   }
@@ -290,6 +322,11 @@ export class ProfilePage implements AfterViewInit  {
       console.log(body)
       this.postPvdr.postData(body, 'proses-api.php').subscribe(async data =>{
 console.log(data)
+if(data['success']==true){
+  this.Alert(data['msg'],'Success')
+}else{
+  this.Alert(data['msg'],'Error')
+}
       })
 
   }
@@ -300,12 +337,12 @@ console.log(data)
       header: 'Change Password',
       inputs: [
         {
-          name: 'oddpass',
+          name: 'oldpassword',
           type:'password',
           placeholder:'Old Password'
         },
         {
-          name: 'newpass',
+          name: 'newpassword',
           type:'password',
           placeholder:'New Password'
         }
@@ -316,6 +353,7 @@ console.log(data)
           role:"update",
           handler: (data)=>{
             this.UpdatePassword(data.oldpassword,data.newpassword)
+            console.log('testing '+data.oldpassword,data.newpassword)
           }
         }
       ]
@@ -326,19 +364,63 @@ console.log(data)
 
   UpdatePassword(oldpassword:any,newpassword:any){
 
+   
+    let body = {
+      aksi:'updatePassword',
+      newpassword:newpassword,
+      checkpassword:this.User['password'],
+      oldpassword:oldpassword,
+      reg_number:this.reg
+    }
+    console.log(body)
+    this.postPvdr.postData(body, 'proses-api.php').subscribe(async data =>{
+console.log(data)
+if(data['success']==true){
+  this.Alert(data['msg'],'Success')
+}else{
+  this.Alert(data['msg'],'Error')
+}
+    })
   }
 
   async downloads(){
     const loading = await this.loadingCtrl.create({
-      duration: 500000000,
+      duration: 1000,
       spinner: 'bubbles'
     });
     await loading.present();
-    await loading.dismiss().then(()=>{
+    await loading.onDidDismiss().then(()=>{
       this.slides.slideTo(3,1000)
     })
   }
 
+async Alert(msg:any,header:any){
 
+  const loading = await this.loadingCtrl.create({
+      duration: 5000,
+      spinner: 'bubbles'
+    });
+    await loading.present();
+    await loading.onDidDismiss().then(async ()=>{
+      const alert = await this.alert.create({
+        header:header,
+        message:msg,
+        backdropDismiss:false,
+        buttons:[
+          {
+            text:'OK',
+            role:'ok',
+            handler:(data)=>{
+              
+            }
+          }
+        ]
+
+})
+await alert.present();
+    })
+
+  
+}
 
 }

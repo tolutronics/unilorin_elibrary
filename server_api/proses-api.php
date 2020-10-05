@@ -277,14 +277,37 @@ $depatment =$postjson['dept'];
     $matric=$postjson['reg_number'];
   $sql= "UPDATE elibrary_users SET email_address = '$email'  WHERE reg_number='$matric'";
   $query = mysqli_query($conn,$sql);
-  if($query) $result = json_encode(array('success'=>true, 'result'=>'success'));
-  else $result = json_encode(array('success'=>false, 'result'=>'error'));
+  if($query) $result = json_encode(array('success'=>true, 'msg'=>'Email successfully updated'));
+  else $result = json_encode(array('success'=>false, 'msg'=>'unable to update password'));
 
   echo $result;
 
   }
 
+  elseif($postjson['aksi']=="updatePassword"){
 
+    $oldpassword = md5($postjson['oldpassword']);
+    $checkpassword =$postjson['checkpassword'];
+    $newpassword =md5($postjson['newpassword']);
+    $matric=$postjson['reg_number'];
+    if ($oldpassword==$checkpassword) {
+      if ($oldpassword !== $newpassword) {
+        $sql= "UPDATE elibrary_users SET password = '$newpassword'  WHERE reg_number='$matric'";
+        $query = mysqli_query($conn,$sql);
+        if($query) $result = json_encode(array('success'=>true, 'msg'=>'Password Successfully Changed'));
+        else $result = json_encode(array('success'=>false, 'msg'=>'Unable to Change Password'));
+      }else{
+        $result = json_encode(array('success'=>false, 'msg'=>'Old password cannot be reused'));
+      }
+      
+    }else {
+      $result = json_encode(array('success'=>false, 'msg'=>'Old password incorrect'));
+    }
+ 
+
+  echo $result;
+
+  }
   elseif($postjson['aksi']=="login"){
    $pass= md5($postjson['password']);
 

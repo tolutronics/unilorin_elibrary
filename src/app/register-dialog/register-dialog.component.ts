@@ -87,6 +87,43 @@ export class RegisterDialogComponent implements OnInit {
   
 //     }else{
 
+if (this.regForm.value['reg_num'].includes('admin')) {
+  const alert = await this.alertCtrl.create({
+    header: 'Error',
+      message: 'invalid Registration number',
+      buttons: ['OK']
+    });
+    alert.present();
+}else if(!this.regForm.value['email'].includes('@')){
+  const alert = await this.alertCtrl.create({
+    header: 'Error',
+      message: 'invalid Email Address',
+      buttons: ['OK']
+    });
+    alert.present();
+}
+
+
+else if(this.regForm.value['password'].length < 7){
+  const alert = await this.alertCtrl.create({
+    header: 'Error',
+      message: "Password length can't be less than 7",
+      buttons: ['OK']
+    });
+    alert.present();
+}
+else if(this.regForm.value['password'] !== this.regForm.value['confirm_password']){
+  const alert = await this.alertCtrl.create({
+    header: 'Error',
+      message: 'Password not match',
+      buttons: ['OK']
+    });
+    alert.present();
+}
+
+else{
+
+
   const loading = await this.loadingCtrl.create({
     duration: 100000,
     spinner: 'bubbles'
@@ -130,6 +167,10 @@ export class RegisterDialogComponent implements OnInit {
           alert.present();
         }
       });
+
+}
+
+  
 
     // }
   

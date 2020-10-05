@@ -50,6 +50,9 @@ z-index: 100;
     & > .logowrap {
      display: flex;
     }
+    &:hover{
+      cursor:pointer;
+    }
   
     & > .logowrap > ion-label{
            margin-top: 10px;

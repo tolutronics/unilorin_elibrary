@@ -5,7 +5,7 @@
 
   <div class="container">
     <div class="header">
-      <ion-icon slot="start" name="arrow-back"></ion-icon>
+      <ion-icon slot="start" name="arrow-back" (click)="home()"></ion-icon>
      <ul>
        
         <li (click)="profile()">Profile</li>
@@ -13,7 +13,7 @@
         <li (click)="settings()">Settings</li>
         <li (click)="downloads()">Downloads</li>
      </ul>
-     <ion-item lines="none" (click)="logout()">
+     <ion-item lines="none" (click)="logoutAlert()">
        <p>Logout</p>
        <ion-icon slot="end" name="log-out-outline"></ion-icon>
       </ion-item>
