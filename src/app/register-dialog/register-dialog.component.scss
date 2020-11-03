@@ -1,5 +1,6 @@
 .head{
     --padding-top: 10px;
+    --padding-bottom: 10px;
 }
 ion-icon{
     transition: 1s;
@@ -7,11 +8,39 @@ ion-icon{
     right: 30px;
 }
 
+.regClass{
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar{
+        display: none;
+    }
+}
+
 ion-icon:hover{
     cursor: pointer;
     transform: rotate(180deg);
     font-size: 30px;
 }
+
+.invalid {
+    border: 1px solid #ea6153;
+}
+.valid {
+    border: none;
+}
+ion-item{
+    --background:none;
+}
+
+.error{
+    color: #ea6153;
+    font-size: 0.8em;
+}
+
 form {
     margin: 0;
     font: inherit;

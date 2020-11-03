@@ -14,21 +14,54 @@
  
 
   if($postjson['aksi']=="register"){
+    function check_number($conn){
+
+      $unique_number = rand(100000000, 999999999);
+      $sql = "SELECT * FROM elibrary_users WHERE user_id='$unique_number'";
+      $query=mysqli_query($conn,$sql);
+      $numrow = mysqli_num_rows($query);
+  
+  
+  
+      if ($numrow >0){
+        $user_id = check_number();
+      }
+       else{
+              $user_id = $unique_number;
+          return $user_id;
+       }
+     
+  
+  }
+
+    $user_id = check_number($conn);
+
+    $email = $postjson['email'];
+
+    $sql = "SELECT * FROM elibrary_users WHERE email_address='$email'";
+    $query=mysqli_query($conn,$sql);
+    $numrow = mysqli_num_rows($query);
+ 
+
+    if (!$numrow >0) {
     $fname = $postjson['fname'];
     $lname = $postjson['lname'];
     $matric = $postjson['matric'];
-    $email = $postjson['email'];
     $department = $postjson['department'];
     $pass = md5($postjson['password']);
     $image =$postjson['image']; 
-   $sql= "INSERT INTO elibrary_users (firstname, lastname, reg_number, email_address, department, password, user_image)
-    VALUES ('$fname', '$lname', '$matric', '$email', '$department', '$pass', '$image')";
+
+   $sql= "INSERT INTO elibrary_users (user_id,firstname, lastname, reg_number, email_address, department, password, user_image)
+    VALUES ('$user_id','$fname', '$lname', '$matric', '$email', '$department', '$pass', '$image')";
 
    $query=mysqli_query($conn, $sql);
 
     if($query) $result = json_encode(array('success'=>true));
     else $result = json_encode(array('success'=>false, 'msg'=>mysqli_error($conn)));
-
+    }
+    else{
+      $result = json_encode(array('success'=>false, 'msg'=>'Email Already Exist'));
+    }
     echo $result;
   }
 

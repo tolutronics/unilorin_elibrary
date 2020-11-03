@@ -2,8 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { PostProvider } from 'src/providers/post-provider';
-import { Plugins } from '@capacitor/core';
+import { Filesystem, FilesystemDirectory, Plugins } from '@capacitor/core';
+import '@capacitor-community/http';
 const { Storage } = Plugins;
+const { Http } = Plugins;
 
 @Component({
   selector: 'app-store',
@@ -91,18 +93,35 @@ this.checkUser()
    }
 
   
-  download(i){
+  download(){
 
-    console.log('testing'+ i);
+    console.log('testing');
+    const downloadFile = async () => {
+      const { Http } = Plugins;
+      const ret = await Http.downloadFile({
+        url: 'http://localhost/elibrary/server_api/uploads',
+        filePath: 'Confessions of a Public Speaker ( PDFDrive.com ).pdf',
+        fileDirectory: FilesystemDirectory.Documents
+      });
+      if (ret.path) {
+        const read = await Filesystem.readFile({
+          path: 'document.pdf',
+          directory: FilesystemDirectory.Documents
+        });
+        // Data is here
+      }
+    }
+
+    //console.log('testing'+ i);
    
-    let body = {
-      filename: i,
-      dselected:this.dep,
-      aksi: 'count',
-    };
-    this.postPvdr.postData(body, 'proses-api.php').subscribe(async data =>{
-      console.log(data['result']);
-    });
+    // let body = {
+    //   filename: i,
+    //   dselected:this.dep,
+    //   aksi: 'count',
+    // };
+    // this.postPvdr.postData(body, 'proses-api.php').subscribe(async data =>{
+    //   console.log(data['result']);
+    // });
     
   }
 

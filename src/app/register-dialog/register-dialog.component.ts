@@ -3,7 +3,7 @@ import { PostProvider } from '../../providers/post-provider';
 import { Router } from '@angular/router';
 import { ToastController, ModalController, AlertController, LoadingController } from '@ionic/angular';
 import { MatDialog} from "@angular/material/dialog"
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup,Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register-dialog',
@@ -11,27 +11,30 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./register-dialog.component.scss'],
 })
 export class RegisterDialogComponent implements OnInit {
-  
+  public regForm: FormGroup;
   error="";
+  isSubmitted = false;
  
-  regForm = new FormGroup({
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
-    department: new FormControl(''),
-    reg_num: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl(''),
-    confirm_password: new FormControl(''),
-    
-});
   constructor(
     public modalCtrl: ModalController,
     private router: Router,
     public dialog:MatDialog,
   	private postPvdr: PostProvider,
     public alertCtrl: AlertController,
-    public loadingCtrl:LoadingController
-  ) { }
+    public loadingCtrl:LoadingController,
+    public formBuilder: FormBuilder
+  ) { 
+
+    this.regForm = formBuilder.group({
+      firstname: ['', Validators.compose([Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+      lastname: ['', Validators.compose([ Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+      password: ['', Validators.compose([Validators.minLength(6),  Validators.required])],
+      reg_num: ['', Validators.compose([Validators.required])],
+      confirm_password: ['', Validators.compose([Validators.minLength(6),  Validators.required])],
+      email: ['',Validators.compose([Validators.maxLength(30), Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$'), Validators.required])],
+      department: ['', Validators.compose([ Validators.required])],
+  });
+  }
 
 
   async close(){
@@ -39,89 +42,16 @@ export class RegisterDialogComponent implements OnInit {
     this.modalCtrl.dismiss()
   }
 
-
+  get errorControl() {
+    return this.regForm.controls;
+  }
   async onSubmit(){
-   // this.close() 
-    //this.presentLoading()
+    this.isSubmitted = true;
+
     console.log(this.regForm.value['firstname'])
 
-//     this.error="";
-//     // validation done
-//     if(this.fname=="" || this.lname=="" ){
-//       this.error="Username is Required";
-//     }
-    
-//     else if(this.fname=="admin" ||  this.lname=="admin" ){
-//       this.error="Name not acceptable";
-      
-//   }else if(this.password==""){
-//     this.error="Password is Required";
-//     }else if(this.email==""){
-//       this.error="Email is Required";
-
-//   }else if(this.matric==""){
-//     this.error="Matric/Staff Number is Required";
-
-// }
-// else if(this.matric=="elibadmin" || this.matric=="admin" || this.matric=="elib@admin"){
-//   this.error="This is neither a matric number nor Staff number";
-
-// }
-
-//   else if(this.department==""){
-//     this.error="department is Required";
-
-// }
-
-// else if(!this.email.includes('@')){
-//   this.error="Invalid Email";
-
-// }
-// else if(this.password.length < 7){
-//   this.error="Password must be greater than 6 characters";
-  
-// }
-    
-//     else if(this.password!=this.confirm_password){
-//       this.error="Password does not match";
-  
-//     }else{
-
-if (this.regForm.value['reg_num'].includes('admin')) {
-  const alert = await this.alertCtrl.create({
-    header: 'Error',
-      message: 'invalid Registration number',
-      buttons: ['OK']
-    });
-    alert.present();
-}else if(!this.regForm.value['email'].includes('@')){
-  const alert = await this.alertCtrl.create({
-    header: 'Error',
-      message: 'invalid Email Address',
-      buttons: ['OK']
-    });
-    alert.present();
-}
 
 
-else if(this.regForm.value['password'].length < 7){
-  const alert = await this.alertCtrl.create({
-    header: 'Error',
-      message: "Password length can't be less than 7",
-      buttons: ['OK']
-    });
-    alert.present();
-}
-else if(this.regForm.value['password'] !== this.regForm.value['confirm_password']){
-  const alert = await this.alertCtrl.create({
-    header: 'Error',
-      message: 'Password not match',
-      buttons: ['OK']
-    });
-    alert.present();
-}
-
-else{
 
 
   const loading = await this.loadingCtrl.create({
@@ -143,10 +73,7 @@ else{
 
       this.postPvdr.postData(body, 'proses-api.php').subscribe(async data =>{
         
-        var alertpesan:string = data['msg'];
-        if(alertpesan.includes('Duplicate entry')){
-          alertpesan=`User with the matric number ${this.regForm.value['reg_num']} already existed`
-        }
+        
         if(data['success']){
            
           await loading.dismiss()
@@ -158,17 +85,16 @@ else{
           });
           alert.present();
         }else{
-          console.log(alertpesan)
           await loading.dismiss()
           const alert = await this.alertCtrl.create({
             header:'Error',
-            message: alertpesan,
+            message: data['msg'],
           });
           alert.present();
         }
       });
 
-}
+
 
   
 

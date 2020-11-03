@@ -41,7 +41,7 @@ export class LoginDialogComponent implements OnInit {
     };
 
     this.postPvdr.postData(body, 'proses-api.php').subscribe(async data =>{
-        var alertpesan = data['msg'];
+
         var user=[]
         var reg=null
         var name=null
@@ -65,11 +65,10 @@ export class LoginDialogComponent implements OnInit {
           //   alert.present();
 
           }else{
-            console.log(alertpesan)
             await loading.dismiss()
             const alert = await this.alertCtrl.create({
               header:'Error',
-              message: alertpesan,
+              message: data['msg'],
             });
             alert.present();
           }

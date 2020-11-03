@@ -21,11 +21,12 @@
       <p slot="start">{{ebook.file_title}}</p>
       <p slot="end">{{ebook.file_size}}KB</p>
       <p slot="end"><ion-icon slot="end" name="download-outline"></ion-icon>{{ebook.file_count}}</p> 
-           <p slot="end" style="text-decoration: underline; cursor: pointer; color: var(--ion-color-secondary);"> Download</p>
+           <a slot="end" style="text-decoration: underline; cursor: pointer; color: var(--ion-color-secondary);" href="http://localhost/elibrary/server_api/uploads/{{ebook.file_title}}">Download</a>
     </ion-item>
 
 </div>
 <app-footer></app-footer>
 </ion-content>
+    
 
  

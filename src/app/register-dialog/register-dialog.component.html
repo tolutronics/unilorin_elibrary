@@ -1,35 +1,44 @@
-<ion-item lines="none" class="head">
+<div class="regClass">
   
-  <h3 slot="start">Register</h3>
-  <ion-icon slot="end" name="close-outline" (click)="close()"></ion-icon>
-</ion-item>
+    <ion-item lines="none" class="head">
+      
+      <h3 slot="start">Register</h3>
+      <ion-icon slot="end" name="close-outline" (click)="close()"></ion-icon>
+    </ion-item>
+    
+    <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
+      <ion-item >
+        <ion-label position="floating">First Name <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required formControlName="firstname" type="text" [class]="isSubmitted && errorControl.firstname.errors? 'inner invalid':'inner valid'"></ion-input>
+    
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Last Name <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required formControlName="lastname" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">E-Mail <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required formControlName="email" type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Department <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required formControlName="department" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Matric / Staff Number <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required formControlName="reg_num" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required formControlName="password" type="password"></ion-input>
+      </ion-item>
+       <ion-item>
+        <ion-label position="floating">Confirm Password <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required formControlName="confirm_password" type="password"></ion-input>
+      </ion-item>
+      <ion-button block color="primary" type="submit" [disabled]="regForm.invalid">
+        Register
+      </ion-button>
+    </form>
 
-<form [formGroup]="regForm" (ngSubmit)="onSubmit()">
-  <ion-item >
-    <ion-label position="floating">First Name <ion-text color="danger">*</ion-text></ion-label>
-    <ion-input required formControlName="firstname" type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Last Name <ion-text color="danger">*</ion-text></ion-label>
-    <ion-input required formControlName="lastname" type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">E-Mail <ion-text color="danger">*</ion-text></ion-label>
-    <ion-input required formControlName="email" type="email"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Matric / Staff Number <ion-text color="danger">*</ion-text></ion-label>
-    <ion-input required formControlName="reg_num" type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
-    <ion-input required formControlName="password" type="password"></ion-input>
-  </ion-item>
-   <ion-item>
-    <ion-label position="floating">Confirm Password <ion-text color="danger">*</ion-text></ion-label>
-    <ion-input required formControlName="confirm_password" type="password"></ion-input>
-  </ion-item>
-  <ion-button block color="primary" type="submit" [disabled]="regForm.invalid">
-    Login
-  </ion-button>
-</form>
+  </div> 
