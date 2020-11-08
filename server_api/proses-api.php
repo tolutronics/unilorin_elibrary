@@ -98,6 +98,7 @@ $file_type =$postjson['type'];
    
     while($row = mysqli_fetch_array($query)){
       $data[] = array(
+        'file_id'=> $row['file_id'],
         'file_title'=> $row['file_title'],
         'file_url'  => $row['file_url'],
         'file_count'=> $row['file_count'],
@@ -121,6 +122,7 @@ $file_type =$postjson['type'];
    
     while($row = mysqli_fetch_array($query)){
       $data[] = array(
+        'file_id'=> $row['file_id'],
         'file_title'=> $row['file_title'],
         'file_url'  => $row['file_url'],
         'file_count'=> $row['file_count'],
@@ -146,6 +148,7 @@ $file_type =$postjson['type'];
    
     while($row = mysqli_fetch_array($query)){
       $data[] = array(
+        'file_id'=> $row['file_id'],
         'file_title'=> $row['file_title'],
         'file_url'  => $row['file_url'],
         'file_count'=> $row['file_count'],
@@ -171,6 +174,7 @@ $file_type =$postjson['type'];
    
     while($row = mysqli_fetch_array($query)){
       $data[] = array(
+        'file_id'=> $row['file_id'],
         'file_title'=> $row['file_title'],
         'file_url'  => $row['file_url'],
         'file_count'=> $row['file_count'],
@@ -195,6 +199,7 @@ $file_type =$postjson['type'];
    
     while($row = mysqli_fetch_array($query)){
       $data[] = array(
+        'file_id'=> $row['file_id'],
         'file_title'=> $row['file_title'],
         'file_url'  => $row['file_url'],
         'file_count'=> $row['file_count'],
@@ -251,6 +256,8 @@ $depatment =$postjson['dept'];
     echo $result;
   }
 
+
+
   elseif($postjson['aksi']=="updateStat"){
     $pass =md5($postjson['password']);
     $matric=$postjson['matric'];
@@ -278,12 +285,52 @@ $depatment =$postjson['dept'];
 
 
   elseif($postjson['aksi']=="count"){
-    $file_name =$postjson['filename'];
+    $data = array();
+    $file_type =$postjson['type'];
+    $file_title =$postjson['file_title'];
+    $user_id =$postjson['user_id'];
+    $file_id =$postjson['file_id'];
+    $file_size =$postjson['file_size'];
+    $file_url =$postjson['file_url'];
+    $download_date =$today;
     $dept=$postjson['dselected'];
-  $sql= "UPDATE elibrary_books SET file_count = file_count+1 WHERE department='$dept'  AND file_title ='$file_name'";
+  $sql= "UPDATE elibrary_books SET file_count = file_count+1 WHERE department='$dept' AND file_id ='$file_id'";
   $query = mysqli_query($conn,$sql);
-  if($query) $result = json_encode(array('success'=>true, 'result'=>'success'));
-  else $result = json_encode(array('success'=>false, 'result'=>'error'));
+  if($query){
+    $sql2= "INSERT INTO download_history (file_id,user_id, file_title, file_type, file_size, file_url, download_date)
+    VALUES ('$file_id','$user_id', '$file_title', '$file_type', '$file_size', '$file_url', '$download_date')";
+
+   $query2=mysqli_query($conn, $sql2);
+
+   if ($query2) {
+    $rsql =  "SELECT * FROM elibrary_books WHERE department='$dept' AND file_type='$file_type'";
+    $rquery=mysqli_query($conn,$rsql);
+    
+   
+    while($row = mysqli_fetch_array($rquery)){
+      $data[] = array(
+        'file_id'=> $row['file_id'],
+        'file_title'=> $row['file_title'],
+        'file_url'  => $row['file_url'],
+        'file_count'=> $row['file_count'],
+        'department'=> $row['department'],
+        'created_at'=> $row['created_at'],
+        'file_type'=> $row['file_type'],
+        'file_size'=> $row['file_size'],
+      );
+    }
+    if($rquery) $result =json_encode(array('success'=>true, 'result'=>$data));
+    else $result =json_encode(array('success'=>false, 'result'=> mysqli_error($conn) ));
+    
+   } else {
+    $result = json_encode(array('success'=>false, 'msg'=>'error'));
+   }
+   
+
+  } 
+  else {
+    $result = json_encode(array('success'=>false, 'result'=>'error'));
+  }
 
   echo $result;
 
@@ -352,7 +399,7 @@ $depatment =$postjson['dept'];
          $data = mysqli_fetch_assoc($query);
          
          $result=  json_encode(array('success'=>true, 'result'=>$data));
-         //mysqli_close($con);
+         
      }else{
          $result= json_encode(array('success'=>false, 'msg'=>'Invalid Login Details'));
      }

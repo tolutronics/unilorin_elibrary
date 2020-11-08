@@ -380,7 +380,7 @@ upload(){
     formData.append('files[]', this.file);
      formData.append('department', this.dselected)
      formData.append('type',this.Tselected)
-    
+    formData.append('aksi','fileUpload')
     
   }
 

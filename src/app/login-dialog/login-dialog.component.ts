@@ -44,19 +44,21 @@ export class LoginDialogComponent implements OnInit {
 
         var user=[]
         var reg=null
+        var user_id=null
         var name=null
         if(data['success'] ){
           await loading.dismiss()
 
          user = data['result']
           reg=user['reg_number'],
+          user_id=user['user_id'],
           name = `${user['firstname']}+' '+ ${user['lastname']}`
           
           this.modalCtrl.dismiss({
             'dismissed': true,
               'reg':reg
           });
-          this.setUserData(reg,name)
+          this.setUserData(reg,name,user_id)
           // const alert = await this.alertCtrl.create({
           //   header: 'Success',
           //     message: 'Registered succesfully, you can log in now',
@@ -78,12 +80,13 @@ export class LoginDialogComponent implements OnInit {
     
   }
 
-  async setUserData(reg:any, name:any) {
+  async setUserData(reg:any, name:any,user_id:any) {
   await Storage.set({
     key: 'userData',
     value: JSON.stringify({
       reg_number: reg,
-      name: name
+      name: name,
+      user_id:user_id
     })
   });
 }

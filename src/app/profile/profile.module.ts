@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { IonicModule } from '@ionic/angular';
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
@@ -13,6 +13,7 @@ import { ProfilePage } from './profile.page';
   imports: [
     CommonModule,
     FormsModule,
+    MatProgressBarModule,
     IonicModule,
     ProfilePageRoutingModule
   ],

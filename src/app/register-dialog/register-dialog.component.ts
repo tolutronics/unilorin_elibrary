@@ -67,7 +67,7 @@ export class RegisterDialogComponent implements OnInit {
         email: this.regForm.value['email'],
         department: this.regForm.value['department'],
         matric: this.regForm.value['reg_num'], 
-        image: '',       
+        image: 'user_images/test.jpg',       
         aksi: 'register'
       };
 

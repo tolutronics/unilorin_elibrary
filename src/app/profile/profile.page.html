@@ -57,10 +57,21 @@
 
       </div>
       <div>
-        <img src="assets/img/tolu.jpg" alt="">
-       <ion-button (click)="onClick()" expand="block" fill="clear" shape="round">
-         Update
-       </ion-button>
+        <img src="http://localhost/elibrary/server_api/{{userImg}}" alt="" class="profileImg">
+       <form method="post" enctype="multipart/form-data">
+          <label for="file" class="ion-button">Update</label>
+           <input type="file" (change)=onDrop($event.target.files) name="files[]" id="file" class="fileInput" accept=".png,.jpg,.jpeg">
+         
+           <!-- <input   id="submit"  name="submit" class="submit" type="submit"> 
+           <label for="submit" class="ion-button" (click)="uploads()" *ngIf="confirm">Confirm your Uploads</label>
+          -->
+          <!-- <mat-progress-bar mode="determinate" [value]="10" max="100" slot="start"></mat-progress-bar> -->
+     
+              <div *ngIf="show"><p style="width:40%" *ngFor="let file of files">{{file.name}}</p></div>
+             
+          </form>
+        
+       
        <p class="delete">Delete My account</p>
       </div>
       </ion-slide>

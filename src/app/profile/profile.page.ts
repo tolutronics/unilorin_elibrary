@@ -14,14 +14,18 @@ export class ProfilePage implements AfterViewInit  {
   email:any
   firstname:any
   lastname:any
-  image:any
+  userImg:any
+  user_id:any
+  show:boolean=false
+  files: File[] = [];
+  file;
   reg:any
   @ViewChild('slides',{static:false}) slides: IonSlides;
   @ViewChild('barCanvas') private barCanvas: ElementRef;
   barChart: any;
-  loggedin=true
-  profilepage=true
-
+  loggedin:boolean=true
+  profilepage:boolean=true
+  confirm:boolean=false
   User=[] as any;
   downloaded = [
     {},
@@ -138,27 +142,34 @@ export class ProfilePage implements AfterViewInit  {
   }
   constructor(public activatedRoute : ActivatedRoute,public postPvdr:PostProvider, public ngZone:NgZone, public loadingCtrl:LoadingController, public alert:AlertController, public router:Router) {
 
-    this.activatedRoute.queryParams.subscribe(res => {
-      this.reg= res.matric;
+    this.activatedRoute.queryParams.subscribe(async res => {
+      this.reg= await res.matric;
       console.log(this.reg)
-    let body = {
-      aksi:'getUser',
-      reg_number:this.reg
-    }
-    this.postPvdr.postData(body, 'proses-api.php').subscribe(async data =>{
-     
-     this.User=data['result']
-     console.log(this.User)
-     this.firstname=this.User['firstname']
-     this.lastname=this.User['lastname']
-     this.email=this.User['email_address']
-     this.image=this.User['user_image']
-     this.reg=this.User['reg_number']
-
-    });
-  });
+      this.getdata(this.reg)
+ 
+  }); 
 
    }
+
+   async getdata(reg:any){
+    let body = {
+      aksi:'getUser',
+      reg_number:reg
+    }
+     this.postPvdr.postData(body, 'proses-api.php').subscribe(async data =>{
+     
+      this.User= await data['result']
+      console.log(this.User)
+      this.firstname=this.User['firstname']
+      this.lastname=this.User['lastname']
+      this.email=this.User['email_address']
+      this.userImg=this.User['user_image']
+      this.reg=this.User['reg_number']
+      this.user_id=this.User['user_id']
+ 
+     });
+   }
+   
 
  
   ngAfterViewInit() {
@@ -313,6 +324,7 @@ this.router.navigate(['/home'])
 
   async updateEmail(email:any){
 
+    if(email!==""){
       this.email=email;
       let body = {
         aksi:'updateEmail',
@@ -329,6 +341,11 @@ if(data['success']==true){
 }
       })
 
+    }else{
+      this.Alert('Please fill in your Email','Error')
+    }
+
+     
   }
 
   async passwordChange(){
@@ -397,7 +414,7 @@ if(data['success']==true){
 async Alert(msg:any,header:any){
 
   const loading = await this.loadingCtrl.create({
-      duration: 5000,
+      duration: 500,
       spinner: 'bubbles'
     });
     await loading.present();
@@ -422,5 +439,48 @@ await alert.present();
 
   
 }
+async upload(){
+ 
+  const url = 'http://localhost/elibrary/server_api/update.php';
+    const formData = new FormData()
+   
+     
+    for (let i = 0; i < this.files.length; i++) {
+      this.file= this.files[i];
+     // console.log(file);
+     // this.filename[i]=this.files[i].name;
+     
+      formData.append('files[]', this.file);
+       formData.append('user_id', this.user_id)
+      
+    }
 
+        // let body={
+        //   files:this.files,
+        //   user_id:this.user_id
+        // }
+ 
+
+       await fetch(url, {
+        method: 'POST',
+        body: formData
+    }).then(async response => {
+      console.log(response)
+      console.log(this.reg)
+     await this.getdata(this.reg)
+      if(response['status']==200){
+        this.show=false
+      }
+    })
+
+}
+async onDrop(files:any){
+this.show=true
+this.confirm=true
+  this.files=files
+
+  this.upload()
+       
+  }
+ 
 }

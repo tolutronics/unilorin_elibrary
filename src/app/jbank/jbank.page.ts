@@ -30,6 +30,7 @@ export class JbankPage implements OnInit {
   status:any;
   display:any;
   matric:any;
+  user_id:any
   message:any;
   constructor(private toastCtrl:ToastController,private postPvdr:PostProvider,private alertController: AlertController,public router:Router,public activatedRoute : ActivatedRoute) { 
 
@@ -49,6 +50,7 @@ export class JbankPage implements OnInit {
     // })
     const ret =  await Storage.get({ key: 'userData' });
     const user = JSON.parse(ret.value);
+    this.user_id=user['user_id'];
     console.log(user)
     if(user==null){
       this.loggedin=false
@@ -80,17 +82,37 @@ export class JbankPage implements OnInit {
   }
 
  
-  download(i){
+  download(file_id:any,file_size:any,file_url:any,file_title:any){
 
-    console.log('testing'+ i);
-   
+    console.log(file_id)
+    console.log(file_size)
+    console.log(file_url)
+    console.log(file_title)
+    console.log(this.dep)
+    
+
     let body = {
-      filename: i,
+      file_id: file_id,
+      user_id: this.user_id,
+      file_size: file_size,
+      file_url:file_url,
+      type:'E-journals',
+      file_title: file_title,
       dselected:this.dep,
       aksi: 'count',
     };
     this.postPvdr.postData(body, 'proses-api.php').subscribe(async data =>{
       console.log(data['result']);
+
+      if(data["success"]==true){
+        
+        for (let i = 0; i < data['result'].length; i++) {
+          
+          this.ebooks[i]['file_count'] = data['result'][i]['file_count']
+          
+        }
+
+      }
     });
     
   }

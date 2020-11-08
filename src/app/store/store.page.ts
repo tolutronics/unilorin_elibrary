@@ -28,6 +28,7 @@ export class StorePage implements OnInit {
   i=0;
   queryText: any;
   dep;
+  user_id:any;
   type;
   count;
   status:any;
@@ -50,7 +51,9 @@ this.checkUser()
     // })
     const ret =  await Storage.get({ key: 'userData' });
     const user = JSON.parse(ret.value);
+    this.user_id=user['user_id'];
     console.log(user)
+    console.log(this.user_id)
     if(user==null){
       this.loggedin=false
       this.presentAlert('Please Log in', "You can't access this page");
@@ -93,35 +96,38 @@ this.checkUser()
    }
 
   
-  download(){
+  download(file_id:any,file_size:any,file_url:any,file_title:any){
 
-    console.log('testing');
-    const downloadFile = async () => {
-      const { Http } = Plugins;
-      const ret = await Http.downloadFile({
-        url: 'http://localhost/elibrary/server_api/uploads',
-        filePath: 'Confessions of a Public Speaker ( PDFDrive.com ).pdf',
-        fileDirectory: FilesystemDirectory.Documents
-      });
-      if (ret.path) {
-        const read = await Filesystem.readFile({
-          path: 'document.pdf',
-          directory: FilesystemDirectory.Documents
-        });
-        // Data is here
+    console.log(file_id)
+    console.log(file_size)
+    console.log(file_url)
+    console.log(file_title)
+    console.log(this.dep)
+    
+
+    let body = {
+      file_id: file_id,
+      user_id: this.user_id,
+      file_size: file_size,
+      file_url:file_url,
+      type:'E-books',
+      file_title: file_title,
+      dselected:this.dep,
+      aksi: 'count',
+    };
+    this.postPvdr.postData(body, 'proses-api.php').subscribe(async data =>{
+      console.log(data['result']);
+
+      if(data["success"]==true){
+        
+        for (let i = 0; i < data['result'].length; i++) {
+          
+          this.ebooks[i]['file_count'] = data['result'][i]['file_count']
+          
+        }
+
       }
-    }
-
-    //console.log('testing'+ i);
-   
-    // let body = {
-    //   filename: i,
-    //   dselected:this.dep,
-    //   aksi: 'count',
-    // };
-    // this.postPvdr.postData(body, 'proses-api.php').subscribe(async data =>{
-    //   console.log(data['result']);
-    // });
+    });
     
   }
 
@@ -131,7 +137,8 @@ this.checkUser()
 
   ngOnInit() {
  
- 
+    this.ebooks = [] ;
+    this.loadedebooks=[]
     this.activatedRoute.queryParams.subscribe((res)=>{
 
       this.dep = res['dept'];
@@ -152,6 +159,7 @@ this.checkUser()
         for(let book of data['result']){
           book['file_size'] = Math.trunc(book['file_size'] / 1000)
           this.ebooks.push(book);
+          console.log(this.ebooks)
           this.loadedebooks.push(book);
         
         }
