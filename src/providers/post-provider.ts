@@ -8,11 +8,8 @@ import 'rxjs/add/operator/timeout'
 
 @Injectable()
 export class PostProvider {
-	//server: string = "http://192.168.0.32/server_api/"; // default
 
 		server: string = "http://localhost/elibrary/server_api/";
-	// if you test in real device "http://localhost" change use the your IP	
-    // server: string = "http://192.199.122.100/IONIC4_CRUD_LOGINREGIS_PHP_MYSQL/server_api/"; 
 
 	constructor(public http : HttpClient) {
 				
